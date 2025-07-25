@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  .container {
+    display: flex;
+  }
+
+  .sidebar {
+    width: 250px;
+    background-color: #f4fef9;
+    padding: 20px;
+    border-right: 2px solid #ccc;
+  }
+
+  .sidebar button,
+  .sidebar button {
+    margin-bottom: 20px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .sub-menu {
+    padding: 3px 8px;
+    padding-left: 30px; /* Add extra space on the left */
+  }
+
+  .highlight {
+    color: rgb(0, 157, 255);
+    padding: 3px 8px;
+    padding-left: 30px; /* Add extra space on the left */
+  }
+
+  .highlight-v2 {
+    color: rgb(0, 157, 255);
+    padding: 3px 8px;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 20px;
+  }
+
+  .tabs button {
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    background-color: #33b5aa;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .data-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+
+  .data-table th,
+  .data-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #e5f8f0;
+  }
+
+  .section-title {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  .red-text {
+    color: red;
+  }
+
+  .red-header {
+    color: red;
+  }
+
+  .blue-text {
+    color: rgba(0, 0, 0, 0.405);
+  }
+
+  .footer-btn {
+    text-align: right;
+    margin-top: 20px;
+  }
+
+  .footer-btn button {
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #b2dfdb;
+    border: 2px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+  }

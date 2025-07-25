@@ -1,0 +1,35 @@
+<?php
+include("config.php");
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Register'])) {
+    $dept = mysqli_real_escape_string($conn, $_POST['dept']);
+    $ic_num = mysqli_real_escape_string($conn, $_POST['ic_num']);
+    $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    // Optional: Secure the password
+    //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO staff (dept, ic_num, fullname, email, password) 
+            VALUES ('$dept', '$ic_num', '$fullname', '$email', '$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        $_SESSION['ic_num'] = $ic_num;
+        $_SESSION['dept'] = $dept;
+
+        // Redirect based on department
+        if (strtolower($dept) === "doa") {
+            header('Location: homepage_doa.html');
+        } else if (strtolower($dept) === "jts") {
+            header('Location: homepage_jts.html');
+        } else {
+            header('Location: maklumat_individu_1.html');
+        }
+        exit;
+    } else {
+        echo "<script>alert('Pendaftaran gagal. Sila cuba lagi.'); window.history.back();</script>";
+    }
+}
+?>

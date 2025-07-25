@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Highlight: Added Tailwind CSS CDN for styling -->
+    <title>Statistics - DOA</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="chart.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="sidebar">
+        <div>
+            <img src="ingenuity.png" alt="Logo" />
+            <nav>
+                <ul>
+                    <!-- Highlight: Changed active class to 'APPLICATIONS' -->
+                    <li><a href="homepage_doa.html">APPLICATIONS</a></li>
+                    <li><a href="statistics.html" class="active">STATISTICS REPORT</a></li>
+                    <li><a href="#">USER MANAGEMENT</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="logout-container">
+            <a href="#" class="logout">
+                <img src="logout.png" alt="Logout" />
+                <span>Log Out</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Highlight: New header section for search and user info -->
+        <div class="header-section">
+            <div class="search-bar">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.1-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zm-116 0c0-66.7-54-120-120-120s-120 54-120 120s54 120 120 120s120-54 120-120z" />
+                </svg>
+                <input type="text" placeholder="Application No." />
+            </div>
+            <div class="user-info">
+                <img src="DOA_logo.png" alt="User Avatar" />
+                <span>Welcome, Omeng!</span>
+            </div>
+        </div>
+
+        <!-- Highlight: New section for applications table -->
+        <div class="applications-section">
+            <div class="dashboard">
+                <div class="header">
+                    <h1>Rice Cultivation Statistics - Sarawak Region</h1>
+                    <p>Data Visualization for Agricultural Planning</p>
+                </div>
+
+                <div class="controls">
+                    <button class="control-btn active" onclick="updateCharts('farmers')">By Farmers</button>
+                    <button class="control-btn" onclick="updateCharts('area')">By Area (ha)</button>
+                    <button class="control-btn" onclick="updateCharts('both')">Both Metrics</button>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-card">
+                        <h2 class="chart-title">Regional Distribution</h2>
+                        <canvas id="regionalChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h2 class="chart-title">Rice Type Comparison</h2>
+                        <canvas id="typeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-card">
+                        <h2 class="chart-title">Farmers vs Cultivation Area</h2>
+                        <canvas id="combinedChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h2 class="chart-title">Productivity (Farmers per Hectare)</h2>
+                        <canvas id="productivityChart"></canvas>
+                    </div>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Rice Type</th>
+                            <th>Region</th>
+                            <th>Number of Farmers</th>
+                            <th>Cultivation Area (ha)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>Sarikei</td>
+                            <td>65</td>
+                            <td>81</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Padi Sawah</td>
+                            <td>Meradong</td>
+                            <td>519</td>
+                            <td>259.5</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>-</td>
+                            <td>Pakan</td>
+                            <td>31</td>
+                            <td>15.5</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>-</td>
+                            <td>Julau</td>
+                            <td>33</td>
+                            <td>16.5</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3">Total</td>
+                            <td>648</td>
+                            <td>372.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <script>
+                // Data from the table
+                const data = {
+                    regions: ['Sarikei', 'Meradong', 'Pakan', 'Julau'],
+                    riceTypes: ['Unknown', 'Padi Sawah', 'Unknown', 'Unknown'],
+                    farmers: [65, 519, 31, 33],
+                    area: [81, 259.5, 15.5, 16.5],
+                    productivity: []
+                };
+
+                // Calculate farmers per hectare
+                data.productivity = data.farmers.map((farmers, index) => {
+                    return (farmers / data.area[index]).toFixed(2);
+                });
+
+                // Colors for charts
+                const colors = {
+                    farmers: '#4b8bb5',
+                    area: '#5cb85c',
+                    padiSawah: '#f0ad4e',
+                    unknown: '#5bc0de',
+                    background: 'rgba(75, 192, 192, 0.2)',
+                    border: 'rgba(75, 192, 192, 1)'
+                };
+
+                // Initialize charts
+                let regionalChart, typeChart, combinedChart, productivityChart;
+
+                function initCharts() {
+                    // Regional Distribution Chart (Bar)
+                    const regionalCtx = document.getElementById('regionalChart').getContext('2d');
+                    regionalChart = new Chart(regionalCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.regions,
+                            datasets: [{
+                                label: 'Number of Farmers',
+                                data: data.farmers,
+                                backgroundColor: colors.farmers,
+                                borderColor: colors.farmers,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            return `${context.dataset.label}: ${context.raw}`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Number of Farmers'
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    // Rice Type Comparison Chart (Pie)
+                    const typeCtx = document.getElementById('typeChart').getContext('2d');
+                    typeChart = new Chart(typeCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Padi Sawah', 'Unknown Type'],
+                            datasets: [{
+                                data: [
+                                    data.farmers[1], // Padi Sawah
+                                    data.farmers[0] + data.farmers[2] + data.farmers[3] // Unknown types
+                                ],
+                                backgroundColor: [colors.padiSawah, colors.unknown],
+                                borderColor: ['#fff', '#fff'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            const label = context.label || '';
+                                            const value = context.raw || 0;
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const percentage = Math.round((value / total) * 100);
+                                            return `${label}: ${value} (${percentage}%)`;
+                                        }
+                                    }
+                                },
+                                datalabels: {
+                                    formatter: (value, ctx) => {
+                                        const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                        const percentage = (value * 100 / total).toFixed(1) + '%';
+                                        return percentage;
+                                    },
+                                    color: '#fff',
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: [ChartDataLabels]
+                    });
+
+                    // Combined Chart (Double Bar)
+                    const combinedCtx = document.getElementById('combinedChart').getContext('2d');
+                    combinedChart = new Chart(combinedCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.regions,
+                            datasets: [
+                                {
+                                    label: 'Number of Farmers',
+                                    data: data.farmers,
+                                    backgroundColor: colors.farmers,
+                                    borderColor: colors.farmers,
+                                    borderWidth: 1,
+                                    yAxisID: 'y'
+                                },
+                                {
+                                    label: 'Cultivation Area (ha)',
+                                    data: data.area,
+                                    backgroundColor: colors.area,
+                                    borderColor: colors.area,
+                                    borderWidth: 1,
+                                    yAxisID: 'y1'
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            return `${context.dataset.label}: ${context.raw}`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                    title: {
+                                        display: true,
+                                        text: 'Number of Farmers'
+                                    }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    title: {
+                                        display: true,
+                                        text: 'Area (ha)'
+                                    },
+                                    grid: {
+                                        drawOnChartArea: false
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    // Productivity Chart (Line)
+                    const productivityCtx = document.getElementById('productivityChart').getContext('2d');
+                    productivityChart = new Chart(productivityCtx, {
+                        type: 'line',
+                        data: {
+                            labels: data.regions,
+                            datasets: [{
+                                label: 'Farmers per Hectare',
+                                data: data.productivity,
+                                backgroundColor: colors.background,
+                                borderColor: colors.border,
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            return `${context.dataset.label}: ${context.raw}`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Farmers per Hectare'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Update charts based on selected view
+                function updateCharts(view) {
+                    // Update control buttons
+                    document.querySelectorAll('.control-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.textContent.toLowerCase().includes(view)) {
+                            btn.classList.add('active');
+                        }
+                    });
+
+                    // Update Regional Chart
+                    if (view === 'farmers') {
+                        regionalChart.data.datasets = [{
+                            label: 'Number of Farmers',
+                            data: data.farmers,
+                            backgroundColor: colors.farmers,
+                            borderColor: colors.farmers,
+                            borderWidth: 1
+                        }];
+                        regionalChart.options.scales.y.title.text = 'Number of Farmers';
+                    } else if (view === 'area') {
+                        regionalChart.data.datasets = [{
+                            label: 'Cultivation Area (ha)',
+                            data: data.area,
+                            backgroundColor: colors.area,
+                            borderColor: colors.area,
+                            borderWidth: 1
+                        }];
+                        regionalChart.options.scales.y.title.text = 'Area (ha)';
+                    }
+
+                    // Update Combined Chart visibility
+                    if (view === 'farmers') {
+                        combinedChart.data.datasets[0].hidden = false;
+                        combinedChart.data.datasets[1].hidden = true;
+                    } else if (view === 'area') {
+                        combinedChart.data.datasets[0].hidden = true;
+                        combinedChart.data.datasets[1].hidden = false;
+                    } else {
+                        combinedChart.data.datasets[0].hidden = false;
+                        combinedChart.data.datasets[1].hidden = false;
+                    }
+
+                    // Update all charts
+                    regionalChart.update();
+                    typeChart.update();
+                    combinedChart.update();
+                    productivityChart.update();
+                }
+
+                // Initialize charts when page loads
+                window.onload = function () {
+                    initCharts();
+                };
+            </script>
+</body>
+
+</html>

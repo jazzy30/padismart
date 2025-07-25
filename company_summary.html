@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Declaration</title>
+    <link rel="stylesheet" href="default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div>
+        <img src="ingenuity.png" alt="Logo" />
+        <nav>
+          <ul>
+            <li><a href="#">COMPANY INFORMATION</a></li>
+            <li><a href="#">LAND INFORMATION</a></li>
+            <li><a href="#" class="active">SUMMARY</a></li>
+            <li><a href="#">STATUS</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="logout-container">
+        <a href="#" class="logout">
+          <img src="logout.png" alt="Logout" />
+          <span>Log Out</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="steps">
+        <div class="step">1</div>
+        <div class="step">2</div>
+        <div class="step active">3</div>
+      </div>
+
+      <h2>APPLICATION SUMMARY</h2>
+
+      <div class="summary-container">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2"><h3>Company Information</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Application No:</strong></td>
+              <td>[APPLICATION_NO]</td>
+            </tr>
+            <tr>
+              <td><strong>Company Name:</strong></td>
+              <td>[COMPANY_NAME]</td>
+            </tr>
+            <tr>
+              <td><strong>Company Registration No:</strong></td>
+              <td>[IC_NO]</td>
+            </tr>
+            <tr>
+              <td><strong>Phone No:</strong></td>
+              <td>[PHONE_NO]</td>
+            </tr>
+            <tr>
+              <td><strong>Email:</strong></td>
+              <td>[EMAIL]</td>
+            </tr>
+            <tr>
+              <td><strong>Address:</strong></td>
+              <td>[ADDRESS]</td>
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr>
+              <th colspan="2"><h3>Land Information</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Land Location:</strong></td>
+              <td>[LAND_LOCATION]</td>
+            </tr>
+            <tr>
+              <td><strong>Estimated Area:</strong></td>
+              <td>[LAND_AREA]</td>
+            </tr>
+            <tr>
+              <td><strong>Ownership Status:</strong></td>
+              <td>[OWNERSHIP_STATUS]</td>
+            </tr>
+            <tr>
+              <td><strong>Crop Type:</strong></td>
+              <td>[CROP_TYPE]</td>
+            </tr>
+            <tr>
+              <td><strong>Land Use Method:</strong></td>
+              <td>[LAND_USE]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br />
+      <h2>DECLARATION</h2>
+
+      <div class="declaration-container">
+        <div class="checkbox-group">
+          <input
+            type="checkbox"
+            id="declaration_checkbox"
+            name="declaration_checkbox"
+          />
+          <label for="declaration_checkbox"
+            >I declare that all information provided is true and accurate, and
+            this account is created in accordance with the Statutory
+            Declarations Act 1960.</label
+          >
+        </div>
+
+        <div class="button-group">
+          <button type="button" onclick="history.back()">BACK</button>
+          <button type="button" id="print_button" disabled>PRINT</button>
+          <button type="button" id="submit_button" disabled>SUBMIT</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const declarationCheckbox = document.getElementById(
+          "declaration_checkbox"
+        );
+        const printButton = document.getElementById("print_button");
+        const submitButton = document.getElementById("submit_button");
+
+        // Function to enable/disable buttons based on checkbox state
+        function toggleButtons() {
+          printButton.disabled = !declarationCheckbox.checked;
+          submitButton.disabled = !declarationCheckbox.checked;
+        }
+
+        // Initial check when the page loads
+        toggleButtons();
+
+        // Add event listener to the checkbox
+        declarationCheckbox.addEventListener("change", toggleButtons);
+
+        // Add event listeners for the print and submit buttons (you can add actual functionality here)
+        printButton.addEventListener("click", function () {
+          if (declarationCheckbox.checked) {
+            generatePDF();
+          } else {
+            showModal("Please tick the declaration checkbox to print.");
+          }
+        });
+
+        async function generatePDF() {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+
+          // Load your watermark image (replace with your actual image path)
+          const watermarkUrl = "ingenuity.png";
+
+          try {
+            // Add watermark image
+            /*
+            const watermark = await loadImage(watermarkUrl);
+            const imgWidth = 180; // adjust as needed
+            const imgHeight = (watermark.height * imgWidth) / watermark.width;
+
+            // Add watermark to each page (for multi-page PDFs)
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+              doc.setPage(i);
+              doc.addImage(
+                watermark,
+                "PNG",
+                125 - imgWidth / 2, // center horizontally
+                200 - imgHeight / 2, // center vertically
+                imgWidth,
+                imgHeight,
+                "",
+                "NONE", // no compression
+                45 // rotation angle
+              );
+            }
+              */
+
+            // Reset to first page for content
+            doc.setPage(1);
+
+            // Rest of your PDF content...
+            doc.setFontSize(18);
+            doc.text("APPLICATION SUMMARY", 105, 20, { align: "center" });
+
+            // ... (rest of your existing PDF generation code)
+            // Add current date
+            const today = new Date();
+            doc.setFontSize(10);
+            doc.text(`Generated on: ${today.toLocaleDateString()}`, 105, 30, {
+              align: "center",
+            });
+
+            // Get all the data from the table
+            const companyInfo = getTableData("Company Information");
+            //const kinInfo = getTableData("Next of Kin Information");
+            const landInfo = getTableData("Land Information");
+
+            // Add company information
+            doc.setFontSize(14);
+            doc.text("Company Information", 14, 40);
+            doc.autoTable({
+              startY: 45,
+              //head: [["Field", "Value"]],
+              body: companyInfo,
+              theme: "grid",
+              headStyles: { fillColor: [241, 241, 241], textColor: 0 },
+              styles: { fontSize: 10 },
+            });
+
+            // Add land information
+            const landY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text("Land Information", 14, landY);
+            doc.autoTable({
+              startY: landY + 5,
+              //head: [["Field", "Value"]],
+              body: landInfo,
+              theme: "grid",
+              headStyles: { fillColor: [241, 241, 241], textColor: 0 },
+              styles: { fontSize: 10 },
+            });
+
+            // Add declaration text
+            const declarationY = doc.lastAutoTable.finalY + 15;
+            /*doc.setFontSize(10);
+            doc.text(
+              "I declare that all information provided is true and accurate, and",
+              14,
+              declarationY
+            );
+            doc.text(
+              "this account is created in accordance with the Statutory Declarations Act 1960.",
+              14,
+              declarationY + 5
+            );
+            */
+
+            // Add no signature required text
+            doc.setFontSize(8);
+            doc.setFont(undefined, "italic");
+            doc.text(
+              "Note: This is a system-generated document and does not require a physical signature.",
+              14,
+              declarationY + 15
+            );
+            doc.text(
+              "PadiSmart Copyright © 2025_Ingenuity",
+              14,
+              declarationY + 20
+            );
+            doc.text(
+              "Jabatan Tanah dan Survei Bahagian & Sarikei",
+              14,
+              declarationY + 25
+            );
+
+            doc.save(`Application_Summary_${new Date().getTime()}.pdf`);
+          } catch (error) {
+            console.error("Error generating PDF:", error);
+            showModal("Error generating PDF. Please try again.");
+          }
+        }
+
+        // Helper function to load image
+        function loadImage(url) {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = url;
+          });
+        }
+
+        function getTableData(sectionName) {
+          const sectionHeader = Array.from(
+            document.querySelectorAll("th")
+          ).find((th) => th.textContent.trim() === sectionName);
+
+          if (!sectionHeader) return [];
+
+          const sectionTable =
+            sectionHeader.closest("thead").nextElementSibling;
+          const rows = sectionTable.querySelectorAll("tr");
+
+          return Array.from(rows).map((row) => {
+            const cells = row.querySelectorAll("td");
+            return [cells[0].textContent.trim(), cells[1].textContent.trim()];
+          });
+        }
+
+        submitButton.addEventListener("click", function () {
+          if (declarationCheckbox.checked) {
+            // Implement submit functionality, e.g., send data to a server
+            // For now, a simple console log:
+            console.log("Form submitted successfully!");
+            // alert("Form submitted successfully.");"); // Using custom modal in real app
+            showModal("Form submitted successfully!");
+          } else {
+            // alert("Please tick the declaration checkbox to submit."); // Using custom modal in real app
+            showModal("Please tick the declaration checkbox to submit.");
+          }
+        });
+
+        // --- Custom Modal Implementation (instead of alert/confirm) ---
+        function showModal(message) {
+          let modal = document.getElementById("customModal");
+          if (!modal) {
+            modal = document.createElement("div");
+            modal.id = "customModal";
+            modal.className = "modal-overlay";
+            modal.innerHTML = `
+                        <div class="modal-content">
+                            <p id="modalMessage"></p>
+                            <button id="modalCloseButton">OK</button>
+                        </div>
+                    `;
+            document.body.appendChild(modal);
+
+            document
+              .getElementById("modalCloseButton")
+              .addEventListener("click", () => {
+                modal.style.display = "none";
+              });
+          }
+          document.getElementById("modalMessage").textContent = message;
+          modal.style.display = "flex";
+        }
+      });
+    </script>
+  </body>
+</html>

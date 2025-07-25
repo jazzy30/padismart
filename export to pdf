@@ -1,0 +1,54 @@
+# Re-import necessary libraries due to code execution environment reset
+from docx import Document
+
+# Re-create the document after reset
+doc = Document()
+doc.add_heading("Advisor Meeting – System Development Discussion Notes", level=1)
+
+# Header info
+doc.add_paragraph("Project Title: Prototype System for Application & Land Information")
+doc.add_paragraph("Meeting Context: Academic Advisor Discussion")
+doc.add_paragraph("Purpose: To get academic feedback and advice for preparing a system proposal and negotiation strategy")
+
+# Questions structured by category
+advisor_questions = {
+    "🎯 Project Planning & Scope": [
+        "Do you think the scope of this system is suitable for a diploma-level final project?",
+        "Based on the system’s storyboard, are there any parts you think I should simplify or leave for future work?",
+        "How detailed should I document the system’s flow and design for academic purposes?",
+        "Would it be better to show a working prototype with fewer features, or include more features even if they’re not all fully functional?"
+    ],
+    "💬 Presentation & Communication": [
+        "What’s the best way to explain this system and its value when presenting to someone outside my course?",
+        "Should I prepare a written proposal, storyboard walkthrough, or live demo when meeting with the external party?",
+        "Do you think having feature tiers (basic vs full) is a good strategy when offering options?"
+    ],
+    "💰 Negotiation Strategy & Justification": [
+        "Do you think asking for RM3,500–RM4,800 for this system is fair, based on the work involved?",
+        "How can I professionally explain why certain features would increase the cost (like the map feature or admin panel)?",
+        "Is it appropriate to give them a proposal with two price options and let them decide?"
+    ],
+    "📁 Documentation & Academic Framing": [
+        "Should I prepare a report or documentation to support this system as part of my portfolio or assignment?",
+        "Would including user manuals or testing logs add value to this project?",
+        "Is it important to align this project with any course outcomes or learning objectives?"
+    ],
+    "🧠 Bonus: Soft Approach Questions": [
+        "How would you suggest I handle a situation where the client has a lower budget than expected?",
+        "Do you have any advice on how to manage scope creep when I’m the only developer?",
+        "Is it okay to deliver a basic version first and propose enhancements later?"
+    ]
+}
+
+# Add questions to the doc with space for notes
+for section, questions in advisor_questions.items():
+    doc.add_heading(section, level=2)
+    for question in questions:
+        doc.add_paragraph(f"• {question}", style='List Bullet')
+        doc.add_paragraph("\n" * 3)  # space for notes
+
+# Save the Word document
+docx_path = "/mnt/data/Advisor_Meeting_Questions.docx"
+doc.save(docx_path)
+
+docx_path

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Maklumat Pemilik Tanah</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #f4fef9;
+        padding: 20px;
+        border-right: 2px solid #ccc;
+      }
+
+      .sidebar h3,
+      .sidebar button {
+        margin-bottom: 20px;
+        font-weight: bold;
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .highlight {
+        background-color: yellow;
+        padding: 3px 8px;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 20px;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 10px 20px;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 20px;
+      }
+
+      .tabs button {
+        padding: 10px 20px;
+        font-weight: bold;
+        border: none;
+        background-color: #33b5aa;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .declaration-box {
+        background-color: #e5f8f0;
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .section-title {
+        font-weight: bold;
+        background-color: #b2dfdb;
+        padding: 10px;
+        color: black;
+        margin-bottom: 10px;
+      }
+
+      .declaration-item {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+        line-height: 1.6;
+      }
+
+      .declaration-item input[type="radio"] {
+        margin-right: 10px;
+        margin-top: 4px;
+      }
+
+      .section-title {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      .red-text {
+        color: red;
+      }
+
+      .footer-btn {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Adds space between buttons */
+      }
+
+      .footer-btn-next {
+        margin-top: 20px;
+        display: flex;
+        justify-content: right;
+        gap: 20px;
+    }
+
+    .footer-btn-next button {
+        padding: 10px 20px;
+        font-weight: bold;
+        background-color: #faff69;
+        border: 2px solid #000;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+
+      .footer-btn button {
+        padding: 10px 20px;
+        font-weight: bold;
+        background-color: #b2dfdb;
+        border: 2px solid #000;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /*progress bar*/
+      .progress-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+      }
+      .step {
+        position: relative;
+        text-align: center;
+        flex: 1;
+      }
+      .step:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 100%;
+        height: 2px;
+        background: #ddd;
+        z-index: -1;
+      }
+      .step:last-child:after {
+        content: none;
+      }
+      .step.active {
+        color: #fff;
+      }
+      .step.active .circle {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ddd;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin: 0 auto;
+      }
+      /*progress bar*/
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="tabs">
+        <button>HALAMAN UTAMA</button>
+        <button style="background-color: white; color: black">
+          MAKLUMAT TERKINI
+        </button>
+      </div>
+      <div>
+        <span>WELCOME, PUBLIC</span>
+        <input type="text" placeholder="Carian" style="margin: 0 10px" />
+        <button>+</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="sidebar">
+        <h3>MAKLUMAT PEMOHON</h3>
+        <button class="highlight">INDIVIDU</button>
+        <button>SYARIKAT SWASTA</button>
+        <h3>PERTANYAAN STATUS</h3>
+        <h3>MAKLUMBALAS PELANGGAN</h3>
+      </div>
+
+      <div class="main-content">
+        <div class="main">
+          <div class="section-title">D. PERAKUAN</div>
+          <!--perakuan box-->
+          <div class="declaration-box">
+            <div class="declaration-item">
+              <input type="radio" checked />
+              <div>
+                Saya dengan ini mengesahkan bahawa semua penyataan dan butiran
+                yang diberikan ini adalah benar dan tepat; dan
+              </div>
+            </div>
+            <div class="declaration-item">
+              <div>
+                Saya membuat akaun ini dengan kepercayaan bahawa apa-apa yang
+                tersebut di dalam pengakuan ini adalah benar serta menurut akta
+                Berkanun 1960.
+              </div>
+            </div>
+          </div>
+          <!--perakuan box-->
+          <!--buttons-->
+          <div class="footer-btn">
+            <button>SIMPAN<br /></button>
+            <button>HANTAR<br /></button>
+            <button>CETAK<br /></button>
+          </div>
+          <!--buttons-->
+        </div>
+
+        
+        <div class="footer-btn-next">
+            <button>SETERUSNYA</button>
+          </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

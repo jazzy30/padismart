@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Farmer Profile Registration</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .progress-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+      }
+      .step {
+        position: relative;
+        text-align: center;
+        flex: 1;
+      }
+      .step:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 100%;
+        height: 2px;
+        background: #ddd;
+        z-index: -1;
+      }
+      .step:last-child:after {
+        content: none;
+      }
+      .step.active {
+        color: #fff;
+      }
+      .step.active .circle {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ddd;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin: 0 auto;
+      }
+      .step div {
+        font-size: 14px; /* Adjust the size as needed */
+      }
+      .step.active div {
+        color: #007bff; /* Change color to make it visible */
+        font-weight: bold; /* Make it bold for emphasis */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Maklumat Pemohon - Individu</h2>
+      <div class="progress-container">
+        <div class="step active">
+          <div class="circle">1</div>
+          <div>Maklumat Pemilik Tanah</div>
+        </div>
+        <div class="step">
+          <div class="circle">2</div>
+          <div>Maklumat Waris</div>
+        </div>
+        <div class="step">
+          <div class="circle">3</div>
+          <div>Maklumat Tanah</div>
+        </div>
+        <div class="step">
+          <div class="circle">4</div>
+          <div>Jenis Tanaman</div>
+        </div>
+        <div class="step">
+          <div class="circle">5</div>
+          <div>Kaedah Penggunaan Tanah</div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

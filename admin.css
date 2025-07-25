@@ -1,0 +1,632 @@
+/* Highlight: Custom CSS for layout and specific styling not easily handled by Tailwind */
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    /* Light gray background */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border-radius: 0.75rem;
+    /* Rounded corners for sidebar */
+    margin: 1rem;
+    /* Margin around sidebar */
+}
+
+.sidebar img {
+    max-width: 80%;
+    /* Limits image width */
+    max-height: 100px;
+    /* Prevents image from being too tall */
+    width: auto;
+    /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
+    object-fit: contain;
+    /* Ensures full image is visible */
+    margin: 0 auto 1rem;
+    /* Centering magic: top/bottom 0, left/right auto */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 1rem;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #4b5563;
+    /* Gray-700 */
+    font-weight: 500;
+    border-radius: 0.5rem;
+    /* Rounded corners for nav items */
+    transition: background-color 0.2s ease;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #f3f4f6;
+    /* Gray-100 on hover */
+}
+
+/* Highlight: Active state for 'APPLICATIONS' in sidebar */
+.sidebar nav ul li a.active {
+    background-color: #e5e7eb;
+    /* Gray-200 for active */
+    color: #1f2937;
+    /* Gray-900 */
+    font-weight: 600;
+}
+
+/* Update the logout container styles */
+.logout-container {
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    width: 100%;
+    margin-top: auto;
+    /* Push to bottom */
+    text-align: center;
+    /* Center text elements */
+}
+
+/* Update the logout button styles */
+.logout {
+    display: inline-flex;
+    /* Change from flex to inline-flex */
+    align-items: center;
+    justify-content: center;
+    /* Center contents horizontally */
+    text-decoration: none;
+    color: #ef4444;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    /* Increased horizontal padding */
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+    width: auto;
+    /* Let it size naturally */
+}
+
+/* Keep the rest of your existing .logout styles */
+.logout:hover {
+    background-color: #fef2f2;
+}
+
+.logout img {
+    width: 20px;
+    height: 20px;
+    /* Fixed dimensions */
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f3f4f6;
+    /* Gray-100 */
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    color: #374151;
+    /* Gray-700 */
+}
+
+.search-bar svg {
+    fill: #9ca3af;
+    /* Gray-400 */
+    width: 50px;
+    height: 18px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #4b5563;
+    /* Gray-700 */
+    font-weight: 500;
+}
+
+.user-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    /* Full circle */
+}
+
+.applications-section {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.applications-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    /* Gray-900 */
+    margin-bottom: 1.5rem;
+}
+
+.application-categories {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    /* Light gray border */
+}
+
+.application-categories div {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #6b7280;
+    /* Gray-500 */
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.application-categories div.active {
+    color: #2563eb;
+    /* Blue-600 */
+    border-color: #2563eb;
+}
+
+.application-categories div:hover {
+    color: #2563eb;
+}
+
+.applications-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.applications-table th,
+/* Ensure table cells have consistent height and perfect centering */
+.applications-table td {
+    text-align: center;
+    vertical-align: middle;
+    height: 52px;
+    padding: 8px !important;
+}
+
+/* For the 5th column specifically */
+.applications-table td:nth-child(5) .action-container {
+    gap: 16px;
+    /* Increased gap between buttons */
+}
+
+/* Action container - now with flex centering */
+.action-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Action buttons - fixed height and centered content */
+.action-btn {
+    display: inline-flex;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    min-width: 60px;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* Checkbox specific styling */
+.action-container input[type="checkbox"] {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+/* Edit button */
+.applications-table td .edit-agri-btn {
+    background-color: #f0f9ff;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+/* View button */
+.applications-table td .view-agri-btn {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+/* View Land button */
+.applications-table td .view-land-btn {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+/* Hover effects */
+.applications-table td .action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.applications-table td .edit-agri-btn:hover {
+    background-color: #e0f2fe;
+}
+
+.applications-table td .view-agri-btn:hover {
+    background-color: #dcfce7;
+}
+
+.applications-table td .view-land-btn:hover {
+    background-color: #dbeafe;
+}
+
+/* Fix checkbox alignment */
+.applications-table td input[type="checkbox"] {
+    margin: 0 auto;
+    display: block;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    /* Helps with alignment */
+    top: 50%;
+    transform: translateY(-50%);
+    /* Perfect vertical centering */
+}
+
+/* Specifically target the checkbox cell */
+.applications-table td:has(input[type="checkbox"]) {
+    position: relative;
+    /* Needed for absolute positioning of child */
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    /* Align to right */
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+}
+
+.pagination button,
+.pagination span {
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: 1px solid #d1d5db;
+    /* Default border */
+    background-color: #ffffff;
+    color: #4b5563;
+}
+
+.pagination button:hover:not(.active),
+.pagination span:hover:not(.active) {
+    background-color: #f3f4f6;
+}
+
+.pagination .active {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+.pagination .next-button {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+.pagination .next-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding-bottom: 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .sidebar img {
+        margin-bottom: 1rem;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    .logout-container {
+        display: none;
+        /* Hide logout on small screens to save space */
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 0.75rem;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .user-info {
+        align-self: flex-end;
+    }
+
+    .applications-section {
+        padding: 1rem;
+    }
+
+    .pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.0rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #e5e7eb;
+    color: #333;
+    border: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+}
+
+.view-field {
+    margin-bottom: 10px;
+}
+
+.view-field label {
+    font-weight: 500;
+    color: #666;
+}
+
+.view-field div {
+    padding: 8px;
+    background-color: #f9fafb;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* Ensure consistent spacing for action buttons in all columns */
+.action-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    /* This controls the space between buttons */
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Specific styling for the buttons */
+.action-btn {
+    display: inline-flex;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    min-width: 60px;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    box-sizing: border-box;
+    margin: 0;
+    white-space: nowrap;
+    /* Prevents text wrapping */
+}
+
+/* Button-specific colors */
+.edit-agri-btn {
+    background-color: #f0f9ff;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+.view-agri-btn {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.view-land-btn {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+/* Hover effects */
+.action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.edit-agri-btn:hover {
+    background-color: #e0f2fe;
+}
+
+.view-agri-btn:hover {
+    background-color: #dcfce7;
+}
+
+.view-land-btn:hover {
+    background-color: #dbeafe;
+}

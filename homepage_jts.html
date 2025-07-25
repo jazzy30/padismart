@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard JTS</title>
+    <!-- Highlight: Added Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="chart.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div>
+        <img src="ingenuity.png" alt="Logo" />
+        <nav>
+          <ul>
+            <!-- Highlight: Changed active class to 'APPLICATIONS' -->
+            <li><a href="#" class="active">APPLICATIONS</a></li>
+            <li><a href="#">STATISTICS REPORT</a></li>
+            <li><a href="#">USER MANAGEMENT</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="logout-container">
+        <a href="#" class="logout">
+          <img
+            src="logout.png"
+            alt="Logout"
+          />
+          <span>Log Out</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Highlight: New header section for search and user info -->
+      <div class="header-section">
+        <div class="search-bar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.1-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zm-116 0c0-66.7-54-120-120-120s-120 54-120 120s54 120 120 120s120-54 120-120z"
+            />
+          </svg>
+          <input type="text" placeholder="Application No." />
+        </div>
+        <div class="user-info">
+          <img src="jts_logo.png" alt="User Avatar" />
+          <span>Welcome, Ali!</span>
+        </div>
+      </div>
+
+      <!-- Highlight: New section for applications table -->
+      <div class="applications-section">
+        <div class="application-categories">
+          <div class="active">NEW</div>
+          <div>ACTIVE</div>
+          <div>COMPLETED</div>
+        </div>
+
+        <table class="applications-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Applicant's Name</th>
+              <th>Application No.</th>
+              <th>Land Details</th>
+              <th>For Agricultural Office Use</th>
+              <th>Post to JTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Highlight: Sample data for the table -->
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>APP-2023-001</td>
+              <td><a href="#" class="action-btn view-land-btn">View</a></td>
+              <td>
+                <div class="action-container">
+                  <a href="#" class="action-btn edit-agri-btn">Edit</a>
+                  <a href="#" class="action-btn view-agri-btn">View</a>
+                </div>
+              </td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jane Smith</td>
+              <td>APP-2023-002</td>
+              <td><a href="#" class="action-btn view-land-btn">View</a></td>
+              <td>
+                <div class="action-container">
+                  <a href="#" class="action-btn edit-agri-btn">Edit</a>
+                  <a href="#" class="action-btn view-agri-btn">View</a>
+                </div>
+              </td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Robert Johnson</td>
+              <td>APP-2023-003</td>
+              <td><a href="#" class="action-btn view-land-btn">View</a></td>
+              <td>
+                <div class="action-container">
+                  <a href="#" class="action-btn edit-agri-btn">Edit</a>
+                  <a href="#" class="action-btn view-agri-btn">View</a>
+                </div>
+              </td>
+              <td><input type="checkbox" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Highlight: Pagination and Next button -->
+        <div class="pagination">
+          <button>&lt;</button>
+          <span class="active">1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>...</span>
+          <span>9</span>
+          <span>10</span>
+          <button>&gt;</button>
+          <button class="next-button">NEXT</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Land Details Modal -->
+    <div id="viewLandModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Land Details</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="view-field">
+            <label>Land Location:</label>
+            <div>Sarikei</div>
+          </div>
+          <div class="view-field">
+            <label>Estimated Area (ha):</label>
+            <div>5.2</div>
+          </div>
+          <div class="view-field">
+            <label>Ownership Status:</label>
+            <div>NCR</div>
+          </div>
+          <div class="view-field">
+            <label>Crop Type:</label>
+            <div>Paddy</div>
+          </div>
+          <div class="view-field">
+            <label>Land Use Method</label>:</label>
+            <div>Rental</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Agricultural Office Details Modal -->
+    <div id="viewAgriModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Agricultural Office Details</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="view-field">
+            <label>Application Status:</label>
+            <div>Pending Review</div>
+          </div>
+          <div class="view-field">
+            <label>Assigned Officer:</label>
+            <div>Officer Ahmad</div>
+          </div>
+          <div class="view-field">
+            <label>Inspection Date:</label>
+            <div>15/06/2023</div>
+          </div>
+          <div class="view-field">
+            <label>Inspection Notes:</label>
+            <div>
+              Land appears suitable for intended use. Soil quality good.
+            </div>
+          </div>
+          <div class="view-field">
+            <label>Approval Date:</label>
+            <div>-</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Agricultural Office Details Modal -->
+    <div id="editAgriModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Agricultural Office Details</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="agriForm">
+            <div class="form-group">
+              <label for="status">Application Status:</label>
+              <select id="status" name="status">
+                <option value="pending">Pending Review</option>
+                <option value="inspection">Inspection Scheduled</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="officer">Assigned Officer:</label>
+              <input
+                type="text"
+                id="officer"
+                name="officer"
+                value="Officer Ahmad"
+              />
+            </div>
+            <div class="form-group">
+              <label for="inspectionDate">Inspection Date:</label>
+              <input
+                type="date"
+                id="inspectionDate"
+                name="inspectionDate"
+                value="2023-06-15"
+              />
+            </div>
+            <div class="form-group">
+              <label for="notes">Inspection Notes:</label>
+              <textarea id="notes" name="notes" rows="3">Land appears suitable for intended use. Soil quality good.</textarea
+              >
+            </div>
+            <div class="form-group">
+              <label for="approvalDate">Approval Date:</label>
+              <input type="date" id="approvalDate" name="approvalDate" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary close-btn">Cancel</button>
+          <button class="btn btn-primary" id="saveAgriBtn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Highlight: Placeholder function for future redirection
+      function redirectToNewApplication() {
+        // Here you can add validation if needed
+        console.log("Redirecting to new application page or action...");
+        // window.location.href = "new_application.html"; // Example redirect
+      }
+
+      // Highlight: Script to handle active category in table
+      document.addEventListener("DOMContentLoaded", () => {
+        const categories = document.querySelectorAll(
+          ".application-categories div"
+        );
+        categories.forEach((category) => {
+          category.addEventListener("click", () => {
+            categories.forEach((cat) => cat.classList.remove("active"));
+            category.classList.add("active");
+            // Here you would typically load different data based on the selected category
+            console.log(`Category "${category.textContent}" clicked.`);
+          });
+        });
+
+        // Modal functionality
+        const viewLandBtns = document.querySelectorAll(".view-land-btn");
+        const viewAgriBtns = document.querySelectorAll(".view-agri-btn");
+        const editAgriBtns = document.querySelectorAll(".edit-agri-btn");
+        const closeBtns = document.querySelectorAll(".close-btn");
+        const viewLandModal = document.getElementById("viewLandModal");
+        const viewAgriModal = document.getElementById("viewAgriModal");
+        const editAgriModal = document.getElementById("editAgriModal");
+        const saveAgriBtn = document.getElementById("saveAgriBtn");
+
+        // Open View Land Modal
+        viewLandBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            viewLandModal.style.display = "flex";
+          });
+        });
+
+        // Open View Agricultural Modal
+        viewAgriBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            viewAgriModal.style.display = "flex";
+          });
+        });
+
+        // Open Edit Agricultural Modal
+        editAgriBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            editAgriModal.style.display = "flex";
+          });
+        });
+
+        // Close modals
+        closeBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            viewLandModal.style.display = "none";
+            viewAgriModal.style.display = "none";
+            editAgriModal.style.display = "none";
+          });
+        });
+
+        // Close when clicking outside modal content
+        window.addEventListener("click", (e) => {
+          if (e.target === viewLandModal) {
+            viewLandModal.style.display = "none";
+          }
+          if (e.target === viewAgriModal) {
+            viewAgriModal.style.display = "none";
+          }
+          if (e.target === editAgriModal) {
+            editAgriModal.style.display = "none";
+          }
+        });
+
+        // Save agricultural office details
+        saveAgriBtn.addEventListener("click", () => {
+          // Here you would typically save the form data
+          console.log("Form data saved");
+          editAgriModal.style.display = "none";
+          // You might want to show a success message or update the table
+        });
+      });
+    </script>
+  </body>
+</html>

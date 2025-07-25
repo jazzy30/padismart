@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Declaration</title>
+    <link rel="stylesheet" href="default.css" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div>
+        <img src="ingenuity.png" alt="Logo" />
+        <nav>
+          <ul>
+            <li><a href="#">LAND OWNER INFORMATION</a></li>
+            <li><a href="#">LAND INFORMATION</a></li>
+            <li><a href="#" class="active">DECLARATION</a></li>
+            <li><a href="#">STATUS</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="logout-container">
+        <a href="#" class="logout">
+          <img src="logout.png" alt="Logout" />
+          <span>Log Out</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="steps">
+        <div class="step">1</div>
+        <div class="step">2</div>
+        <div class="step active">3</div>
+      </div>
+
+      <h2>APPLICATION SUMMARY</h2>
+
+      <div class="summary-container">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2"><h3>Land Owner Information</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Application No:</strong></td>
+              <td>[APPLICATION_NO]</td>
+            </tr>
+            <tr>
+              <td><strong>Full Name:</strong></td>
+              <td>[FULL_NAME]</td>
+            </tr>
+            <tr>
+              <td><strong>IC No:</strong></td>
+              <td>[IC_NO]</td>
+            </tr>
+            <tr>
+              <td><strong>Phone No:</strong></td>
+              <td>[PHONE_NO]</td>
+            </tr>
+            <tr>
+              <td><strong>Email:</strong></td>
+              <td>[EMAIL]</td>
+            </tr>
+            <tr>
+              <td><strong>Address:</strong></td>
+              <td>[ADDRESS]</td>
+            </tr>
+            <tr>
+              <td><strong>No. of Dependents:</strong></td>
+              <td>[NO_OF_DEPENDENTS]</td>
+            </tr>
+            <tr>
+              <td><strong>Total Income:</strong></td>
+              <td>[TOTAL_INCOME]</td>
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr>
+              <th colspan="2"><h3>Next of Kin Information</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Next of Kin:</strong></td>
+              <td>[NEXT_OF_KIN]</td>
+            </tr>
+            <tr>
+              <td><strong>Relationship with Owner:</strong></td>
+              <td>[RELATIONSHIP]</td>
+            </tr>
+            <tr>
+              <td><strong>Dependents:</strong></td>
+              <td>[DEPENDENTS]</td>
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr>
+              <th colspan="2"><h3>Land Information</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Land Location:</strong></td>
+              <td>[LAND_LOCATION]</td>
+            </tr>
+            <tr>
+              <td><strong>Estimated Area:</strong></td>
+              <td>[LAND_AREA]</td>
+            </tr>
+            <tr>
+              <td><strong>Ownership Status:</strong></td>
+              <td>[OWNERSHIP_STATUS]</td>
+            </tr>
+            <tr>
+              <td><strong>Crop Type:</strong></td>
+              <td>[CROP_TYPE]</td>
+            </tr>
+            <tr>
+              <td><strong>Land Use Method:</strong></td>
+              <td>[LAND_USE]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br />
+      <h2>DECLARATION</h2>
+
+      <div class="declaration-container">
+        <div class="checkbox-group">
+          <input
+            type="checkbox"
+            id="declaration_checkbox"
+            name="declaration_checkbox"
+          />
+          <label for="declaration_checkbox"
+            >I declare that all information provided is true and accurate, and
+            this account is created in accordance with the Statutory
+            Declarations Act 1960.</label
+          >
+        </div>
+
+        <div class="button-group">
+          <button type="button" onclick="history.back()">BACK</button>
+          <button type="button" id="print_button" disabled>PRINT</button>
+          <button type="button" id="submit_button" disabled>SUBMIT</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const declarationCheckbox = document.getElementById(
+          "declaration_checkbox"
+        );
+        const printButton = document.getElementById("print_button");
+        const submitButton = document.getElementById("submit_button");
+
+        // Function to enable/disable buttons based on checkbox state
+        function toggleButtons() {
+          printButton.disabled = !declarationCheckbox.checked;
+          submitButton.disabled = !declarationCheckbox.checked;
+        }
+
+        // Initial check when the page loads
+        toggleButtons();
+
+        // Add event listener to the checkbox
+        declarationCheckbox.addEventListener("change", toggleButtons);
+
+        // Add event listeners for the print and submit buttons (you can add actual functionality here)
+        printButton.addEventListener("click", function () {
+          if (declarationCheckbox.checked) {
+            // Implement print functionality, e.g., window.print();
+            // For now, a simple console log:
+            console.log("Printing document...");
+            // alert("Printing document..."); // Using custom modal in real app
+            showModal("Printing document...");
+          } else {
+            // alert("Please tick the declaration checkbox to print."); // Using custom modal in real app
+            showModal("Please tick the declaration checkbox to print.");
+          }
+        });
+
+        submitButton.addEventListener("click", function () {
+          if (declarationCheckbox.checked) {
+            // Implement submit functionality, e.g., send data to a server
+            // For now, a simple console log:
+            console.log("Form submitted successfully!");
+            // alert("Form submitted successfully.");"); // Using custom modal in real app
+            showModal("Form submitted successfully!");
+          } else {
+            // alert("Please tick the declaration checkbox to submit."); // Using custom modal in real app
+            showModal("Please tick the declaration checkbox to submit.");
+          }
+        });
+
+        // --- Custom Modal Implementation (instead of alert/confirm) ---
+        function showModal(message) {
+          let modal = document.getElementById("customModal");
+          if (!modal) {
+            modal = document.createElement("div");
+            modal.id = "customModal";
+            modal.className = "modal-overlay";
+            modal.innerHTML = `
+                        <div class="modal-content">
+                            <p id="modalMessage"></p>
+                            <button id="modalCloseButton">OK</button>
+                        </div>
+                    `;
+            document.body.appendChild(modal);
+
+            document
+              .getElementById("modalCloseButton")
+              .addEventListener("click", () => {
+                modal.style.display = "none";
+              });
+          }
+          document.getElementById("modalMessage").textContent = message;
+          modal.style.display = "flex";
+        }
+      });
+    </script>
+  </body>
+</html>

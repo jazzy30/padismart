@@ -1,0 +1,438 @@
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #fff;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #f9f9f9;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar img {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+    }
+
+    .sidebar nav ul li {
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .sidebar nav ul li a {
+      text-decoration: none;
+      color: black;
+      display: block;
+      padding: 5px 0;
+    }
+
+    .sidebar nav ul li a.active {
+      color: #00bcd4;
+    }
+
+    .logout-container {
+      padding: 15px 0;
+      border-top: 1px solid #ddd;
+      margin-top: 20px;
+    }
+
+    .logout {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .logout:hover {
+      color: #00bcd4;
+    }
+
+    .logout img {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 35px 60px;
+      overflow-y: auto;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #ccc;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      margin: 0 15px;
+      position: relative;
+    }
+
+    .step.active {
+      background-color: #00e0ff;
+    }
+
+    .step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -35px;
+      width: 30px;
+      height: 2px;
+      background-color: #ccc;
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    form {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 12px 30px;
+      background-color: #222;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    button[onclick="history.back()"] {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    button[onclick="history.back()"]:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* NEW CSS for Declaration Page */
+
+    .step.inactive::after {
+      background-color: #ccc;
+      /* Ensure the line after an inactive step is grey */
+    }
+
+    .main-content {
+      /* Existing styles */
+      flex: 1;
+      padding: 35px 60px;
+      overflow-y: auto;
+      display: flex;
+      /* Added for better centering of declaration content */
+      flex-direction: column;
+      /* Added */
+      align-items: center;
+      /* Added to center content horizontally */
+    }
+
+    h2 {
+      /* Existing styles */
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      width: 100%;
+      /* Ensure h2 takes full width for centering */
+    }
+
+    .declaration-container {
+      width: 100%;
+      max-width: 800px;
+      /* Adjust as needed, matching form-container's max-width */
+      margin-top: 5px;
+      /* Space from the H2 */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      /* Align content to the start (left) */
+      gap: 40px;
+      /* Space between checkbox and buttons */
+      padding: 20px;
+      /* Add some padding */
+      border-top: 1px solid #ccc;
+      /* Line above the declaration as per image */
+      padding-top: 40px;
+      /* Space below the line */
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      /* Align checkbox and text at the top */
+      gap: 15px;
+      /* Space between checkbox and label text */
+      width: 100%;
+      max-width: 600px;
+      /* Constrain width of the text for readability */
+      margin-left: auto;
+      /* Push to center if max-width is less than parent */
+      margin-right: auto;
+      /* Push to center */
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 24px;
+      /* Larger checkbox for easier clicking */
+      height: 24px;
+      min-width: 24px;
+      /* Prevent shrinking on smaller screens */
+      min-height: 24px;
+      accent-color: #00e0ff;
+      /* Style the checkbox color */
+      margin-top: 2px;
+      /* Slight adjustment for visual alignment with text */
+    }
+
+    .checkbox-group label {
+      display: block;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      font-weight: normal;
+      /* Override bold if inherited from other labels */
+      cursor: pointer;
+      /* Indicate it's clickable */
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+      /* Align buttons to the right as per image */
+      gap: 15px;
+      width: 100%;
+      margin-top: 50px;
+      /* Space above buttons */
+    }
+
+    /* Style for disabled buttons */
+    button:disabled {
+      background-color: #e0e0e0;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    /* Custom Modal Styles (instead of alert/confirm) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+      /* Hidden by default */
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .modal-content button {
+      padding: 10px 25px;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background-color: #00a2bb;
+    }
+
+    /* Responsive adjustments for steps */
+    .steps .step:nth-child(3).active {
+      background-color: #00e0ff;
+    }
+
+    .steps .step:nth-child(4) {
+      background-color: #ccc;
+      /* Ensure step 4 is grey initially */
+    }
+
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: inherit;
+      min-height: 38px;
+      /* match your input height */
+    }
+
+    .summary-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .summary-container table {
+      width: 300%;
+      max-width: 5000px;
+      border-collapse: collapse;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .summary-container th {
+      text-align: center;
+      padding: 15px;
+      background-color: #f2f2f2;
+      font-size: 1.1em;
+    }
+
+    .summary-container td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .summary-container td.label {
+      width: 35%;
+      font-weight: bold;
+      text-align: right;
+      vertical-align: top;
+      padding-right: 20px;
+    }
+
+    .summary-container td.value {
+      width: 65%;
+      text-align: left;
+    }
+
+    .summary-container tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .summary-container h3 {
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* Style for file input */
+    input[type="file"] {
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      width: 100%;
+      background-color: #f9fafb;
+    }
+
+    .file-hint {
+      display: block;
+      color: #6b7280;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }

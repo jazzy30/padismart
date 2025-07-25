@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PADISMART HOMEPAGE</title>
+    <link rel="stylesheet" href="homepage.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header and Nav remain the same -->
+    <div class="header d-flex justify-content-between align-items-center px-4">
+      <div class="logo">
+        <img src="ingenuity.png" alt="Logo" height="50" />
+      </div>
+      <div class="search-bar w-50">
+        <input type="text" class="form-control" placeholder="Type to search" />
+      </div>
+      <div>
+        <button type="button" class="btn btn-outline-secondary me-2" id="languageToggle">BM/EN</button>
+        <button type="button" class="btn btn-outline-dark me-2" data-en="Log in" data-bm="Log masuk" onclick="window.location.href='login_page.php'">Log in</button>
+        <button type="button" class="btn btn-dark" data-en="Register" data-bm="Daftar" onclick="window.location.href='public_register.php'">Register</button>
+      </div>
+    </div>
+
+    <!--nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+      <div class="navbar-nav">
+        <a class="nav-link" href="#" data-en="Home" data-bm=" Halaman Utama">Home</a>
+        <a class="nav-link" href="#" data-en="New Application" data-bm="Permohonan Baru">New Application</a>
+        <a class="nav-link" href="#" data-en="Contact Us" data-bm="Hubungi Kami">Contact Us</a>
+        <a class="nav-link" href="#" data-en="FAQ" data-bm="Soalan Lazim">FAQ</a>
+      </div>
+    </-nav-->
+
+    <div class="container mt-4">
+      <div class="products-container">
+        <h5 class="text-center fw-bold mb-4" data-en="Our Service and Products" data-bm="Perkhidmatan dan Produk Kami">Our Service and Products</h5>
+        <div class="products-row">
+          <div class="product-card">
+            <div class="product-image-container">
+              <img src="elasis.jpeg" alt="eLASIS" class="img-fluid product-image" />
+            </div>
+            <div class="product-name" data-en="eLASIS" data-bm="eLASIS">eLASIS</div>
+          </div>
+          <div class="product-card">
+            <div class="product-image-container">
+              <img src="eSearch.jpg" alt="eSearch" class="img-fluid product-image" />
+            </div>
+            <div class="product-name" data-en="eSearch" data-bm="eSearch">eSearch</div>
+          </div>
+          <div class="product-card">
+            <div class="product-image-container">
+              <img src="eMap.jpg" alt="eMap" class="img-fluid product-image" />
+            </div>
+            <div class="product-name" data-en="eMap" data-bm="eMap">eMap</div>
+          </div>
+          <div class="product-card">
+            <div class="product-image-container">
+              <img src="padismart_logo.png" alt="PADiSMART" class="img-fluid product-image" />
+            </div>
+            <div class="product-name" data-en="PADiSMART" data-bm="PADiSMART">PADiSMART</div>
+          </div>
+          <div class="product-card">
+            <div class="product-image-container">
+              <img src="spay global.png" alt="SPay Global" class="img-fluid product-image" />
+            </div>
+            <div class="product-name" data-en="SPay Global" data-bm="SPay Global">SPay Global</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rest of the content remains the same -->
+      <div class="row mt-4 text-center g-3">
+        <div class="col-md-4">
+          <div class="info-box">
+            <div data-en="VISION" data-bm="VISI">VISION</div>
+            <div class="mt-2" data-en="EXCELLENCE IN ADMINISTRATION AND MANAGEMENT OF LAND" data-bm="CEMERLANG DALAM PENTADBIRAN DAN PENGURUSAN TANAH">
+              EXCELLENCE IN ADMINISTRATION AND MANAGEMENT OF LAND
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info-box">
+            <div data-en="MISSION" data-bm="MISI">MISSION</div>
+            <div class="mt-2" data-en="TO ADMINISTER AND MANAGE LAND WITH THE LATEST TECHNOLOGY FOR THE BENEFITS OF THE PEOPLE AND STATE" data-bm="MENTADBIR DAN MENGURUS TANAH DENGAN TEKNOLOGI TERKINI UNTUK MANFAAT RAKYAT DAN NEGARA">
+              TO ADMINISTER AND MANAGE LAND WITH THE LATEST TECHNOLOGY FOR THE
+              BENEFITS OF THE PEOPLE AND STATE
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info-box">
+            <div data-en="SLOGAN" data-bm="COGAN KATA">SLOGAN</div>
+            <div class="mt-2" data-en="AN AGENCY TO FACILITATE DEVELOPMENT" data-bm="AGENSI UNTUK MEMUDAHKAN PEMBANGUNAN">AN AGENCY TO FACILITATE DEVELOPMENT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h6 data-en="Quicklinks" data-bm="Pautan Pantas">Quicklinks</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" data-en="Premier of Sarawak" data-bm="Premier Sarawak">Premier of Sarawak</a></li>
+              <li><a href="#" data-en="Sarawak Government" data-bm="Kerajaan Sarawak">Sarawak Government</a></li>
+              <li><a href="#" data-en="Sarawak Data" data-bm="Data Sarawak">Sarawak Data</a></li>
+              <li><a href="#" data-en="Malaysia Government" data-bm="Kerajaan Malaysia">Malaysia Government</a></li>
+              <li><a href="#" data-en="Malaysia Open Data" data-bm="Data Terbuka Malaysia">Malaysia Open Data</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6 data-en="Operation Hours" data-bm="Waktu Operasi">Operation Hours</h6>
+            <p data-en="Monday - Thursday 8:00am to 1:00pm & 2:00pm to 5:00pm" data-bm="Isnin - Khamis 8:00 pagi hingga 1:00 tengahari & 2:00 petang hingga 5:00 petang">Monday - Thursday 8:00am to 1:00pm & 2:00pm to 5:00pm</p>
+            <p data-en="Friday 8:00am to 11:45am & 2:15pm to 5:00pm" data-bm="Jumaat 8:00 pagi hingga 11:45 pagi & 2:15 petang hingga 5:00 petang">Friday 8:00am to 11:45am & 2:15pm to 5:00pm</p>
+            <p data-en="Saturday, Sunday & Public Holiday Counter Closed" data-bm="Sabtu, Ahad & Cuti Umum Kaunter Ditutup">Saturday, Sunday & Public Holiday Counter Closed</p>
+          </div>
+          <div class="col-md-3">
+            <h6 data-en="Support" data-bm="Sokongan">Support</h6>
+            <a href="#" data-en="Terms & Conditions" data-bm="Terma & Syarat">Terms & Conditions</a>
+          </div>
+          <div class="col-md-3">
+            <h6 data-en="Latest Events" data-bm="Acara Terkini">Latest Events</h6>
+            <p data-en="No events at the moment" data-bm="Tiada acara buat masa ini">No events at the moment</p>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <small
+            data-en="Copyright &copy; 2025 Ingenuity | Best viewed on latest of Chrome, Firefox, IE and Safari."
+            data-bm="Hak Cipta &copy; 2025 Ingenuity | Paparan terbaik pada versi terkini Chrome, Firefox, IE dan Safari."
+            >Copyright &copy; 2025 Ingenuity | Best viewed on latest of Chrome,
+            Firefox, IE and Safari.</small
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Language toggle functionality
+      document.getElementById('languageToggle').addEventListener('click', function() {
+        const currentLang = document.documentElement.lang;
+        const newLang = currentLang === 'en' ? 'bm' : 'en';
+        document.documentElement.lang = newLang;
+        
+        // Update button text
+        this.textContent = newLang === 'en' ? 'BM/EN' : 'EN/BM';
+        
+        // Toggle all translatable elements
+        document.querySelectorAll('[data-en], [data-bm]').forEach(element => {
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = newLang === 'en' ? element.dataset.en : element.dataset.bm;
+          } else {
+            element.textContent = newLang === 'en' ? element.dataset.en : element.dataset.bm;
+          }
+        });
+      });
+      
+      // Initialize with English
+      document.documentElement.lang = 'en';
+    </script>
+  </body>
+</html>

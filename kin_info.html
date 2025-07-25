@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Land Owner Information</title>
+  <link rel="stylesheet" href="default.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <div>
+      <img src="ingenuity.png" alt="Logo" />
+      <nav>
+        <ul>
+          <li><a href="#" class="active" >LAND OWNER INFORMATION</a></li>
+          <li><a href="#">LAND INFORMATION</a></li>
+          <li><a href="#">DECLARATION</a></li>
+          <li><a href="#">STATUS</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="logout-container">
+      <a href="#" class="logout">
+        <img src="logout.png" alt="Logout">
+        <span>Log Out</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="steps">
+      <div class="step">1</div>
+      <div class="step active">2</div>
+      <div class="step">3</div>
+      <div class="step">4</div>
+    </div>
+
+    <h2>NEXT OF KIN INFORMATION</h2>
+
+    <form>
+      <label for="full_name">FULL NAME</label>
+      <input type="text" id="full_name" name="full_name">
+
+      <label for="ic_no">IC NO.</label>
+      <input type="text" id="ic_no" name="ic_no">
+
+      <label for="phone_no">PHONE NO.</label>
+      <input type="text" id="phone_no" name="phone_no">
+
+      <label for="address">ADDRESS</label>
+      <input type="text" id="address" name="address">
+
+      <label for="dependents">RELATIONSHIP WITH OWNER</label>
+      <input type="number" id="dependents" name="dependents">
+
+      <div class="next-button">
+        <button type="button" onclick="redirectToLandInfo()">NEXT</button>
+        <button type="button" onclick="history.back()">BACK</button>        
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+      function redirectToLandInfo() {
+        // Here you can add validation if needed
+        window.location.href = "land_info.html"; // Redirect to the specified page
+      }
+  </script>
+
+</body>
+</html>

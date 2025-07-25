@@ -1,0 +1,36 @@
+<?php
+include("config.php");
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Register'])) {
+    $type = mysqli_real_escape_string($conn, $_POST['type']);
+    $ic_no = mysqli_real_escape_string($conn, $_POST['ic_no']);
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Secure hashing
+
+    // Check if user already exists
+    $check = mysqli_query($conn, "SELECT * FROM public WHERE ic_no = '$ic_no' OR email = '$email'");
+    if (mysqli_num_rows($check) > 0) {
+        echo "<script>alert('IC number or email already exists.'); window.history.back();</script>";
+        exit;
+    }
+
+    $sql = "INSERT INTO public (type, ic_no, name, email, password) 
+            VALUES ('$type', '$ic_no', '$name', '$email', '$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        $_SESSION['ic_no'] = $ic_no;
+
+        // Redirect based on user type
+        if ($type === "individu") {
+            header("Location: maklumat_individu_1.html");
+        } else {
+            header("Location: maklumat_syarikat_1.html");
+        }
+        exit;
+    } else {
+        echo "<script>alert('Failed to register user.'); window.history.back();</script>";
+    }
+}
+?>

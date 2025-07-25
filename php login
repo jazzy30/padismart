@@ -1,0 +1,124 @@
+<?php
+// Include your database configuration file
+require_once "config.php";
+// Start the session to manage user state
+session_start();
+
+// Check if the request method is POST (i.e., form submission)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve and sanitize the IC number and password from the form submission.
+    // With prepared statements, mysqli_real_escape_string is not strictly necessary for security
+    // as parameter binding handles escaping.
+    $ic_no = $_POST['ic_no'];
+    $password = $_POST['password'];
+
+    // --- Attempt to authenticate from the 'applicant' table ---
+    $applicant_stmt = $conn->prepare("SELECT applicant_id, password, role FROM applicant WHERE ic_no = ?");
+
+    // Check if the statement preparation was successful
+    if ($applicant_stmt === false) {
+        error_log("Failed to prepare applicant statement: " . $conn->error);
+        showLoginError("An unexpected error occurred. Please try again.");
+    }
+
+    $applicant_stmt->bind_param("s", $ic_no);
+    $applicant_stmt->execute();
+    $applicant_result = $applicant_stmt->get_result();
+
+    if ($applicant_result && $applicant_row = $applicant_result->fetch_assoc()) {
+        // IMPORTANT: In production, use password_verify() for secure password checking.
+        // if (password_verify($password, $applicant_row['password'])) {
+        if ($password === $applicant_row['password']) { // CURRENTLY USING PLAIN TEXT (INSECURE!)
+                                                          // REPLACE WITH password_verify() IN PRODUCTION!
+
+            $_SESSION['user_id'] = $applicant_row['applicant_id']; // Use a generic 'user_id'
+            $_SESSION['role'] = $applicant_row['role']; // Role will be 'individual' or 'company'
+            $_SESSION['user_type'] = 'applicant'; // Identify the source table/user type
+
+            // Redirect based on applicant role
+            if ($applicant_row['role'] == "individual") {
+                header("Location: landowner_info.html");
+                exit;
+            } else if ($applicant_row['role'] == "company") {
+                header("Location: company_info.html");
+                exit;
+            } else {
+                // Handle unexpected roles for applicants
+                showLoginError("Invalid applicant role. Please contact support.");
+            }
+        } else {
+            // Password incorrect for applicant, proceed to check staff
+            // Do NOT show error yet, as it might be a staff login.
+        }
+    }
+    // Close the applicant statement
+    $applicant_stmt->close();
+
+    // If login was not successful as an applicant, try the 'staff' table
+    if (!isset($_SESSION['user_id'])) { // Only proceed if a user hasn't been logged in yet
+        $staff_stmt = $conn->prepare("SELECT staff_id, password, role FROM staff WHERE ic_no = ?");
+
+        if ($staff_stmt === false) {
+            error_log("Failed to prepare staff statement: " . $conn->error);
+            showLoginError("An unexpected error occurred. Please try again.");
+        }
+
+        $staff_stmt->bind_param("s", $ic_no);
+        $staff_stmt->execute();
+        $staff_result = $staff_stmt->get_result();
+
+        if ($staff_result && $staff_row = $staff_result->fetch_assoc()) {
+            // IMPORTANT: In production, use password_verify() for secure password checking.
+            // if (password_verify($password, $staff_row['password'])) {
+            if ($password === $staff_row['password']) { // CURRENTLY USING PLAIN TEXT (INSECURE!)
+                                                          // REPLACE WITH password_verify() IN PRODUCTION!
+
+                $_SESSION['user_id'] = $staff_row['staff_id']; // Use a generic 'user_id'
+                $_SESSION['role'] = $staff_row['role']; // Role could be 'admin', 'manager', 'employee', etc.
+                $_SESSION['user_type'] = 'staff'; // Identify the source table/user type
+
+                // Redirect staff to their dashboard or specific page
+                header("Location: staff_dashboard.html"); // Or staff_dashboard.php
+                exit;
+            } else {
+                // Password incorrect for staff
+                showLoginError("IC number or password is incorrect!");
+            }
+        } else {
+            // No user found in either applicant or staff tables
+            showLoginError("IC number or password is incorrect!");
+        }
+        // Close the staff statement
+        $staff_stmt->close();
+    }
+
+} // End of POST request handling
+
+// Function to display login error using SweetAlert (assuming you have it linked)
+// Added an optional message parameter for more specific error feedback.
+function showLoginError($message = 'IC number or password is incorrect!')
+{
+    // Ensure SweetAlert JS is included.
+    echo "<script src='js/sweetalert.min.js'></script>"; // Make sure this path is correct
+
+    // Use JavaScript to display the SweetAlert message
+    echo "<script>
+        setTimeout(function() {
+            swal({
+                title: 'Login Failed',
+                text: '" . addslashes($message) . "', // Escape single quotes in the message
+                icon: 'warning',
+                timer: 3000,
+                buttons: false // Hide the default 'OK' button if using a timer
+            }).then(function() {
+                // Redirect back to the login page after the alert
+                window.location = 'index.php';
+            });
+        }, 1); // Delay for 1ms to ensure SweetAlert script loads
+    </script>";
+    exit; // Crucial to exit after sending redirect/script to prevent further execution
+}
+
+// Ensure database connection is closed when script finishes or handle it appropriately
+// $conn->close(); // Uncomment if you manage connection closing at the end of every script
+?>
